@@ -1,0 +1,279 @@
+.detailWrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 100;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.backBtn {
+    position: absolute;
+    top: 15px;
+    left: 10px;
+    width: 50px;
+    height: 45px;
+    background: rgba(230, 225, 225, 0);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 10;
+    transition: transform 0.2s ease;
+}
+
+.backIcon {
+    color: #FFFFFFCD;
+}
+
+.backBtn:hover {
+    transform: scale(1.05);
+}
+
+.backBtn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.imageContainer {
+    overflow: hidden;
+    width: 100%;
+}
+
+.imageScroll {
+    display: flex;
+    scroll-snap-type: x mandatory;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+}
+
+.imageScroll::-webkit-scrollbar {
+    display: none;
+}
+
+.imageBox {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+    margin: 0;
+    border: none;
+    box-sizing: border-box;
+}
+
+.image {
+    width: 100%;
+    display: block;
+    height: auto;
+    object-fit: cover;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+}
+
+.dotsContainer {
+    position: relative;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    justify-content: center;
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+    padding: 4px 10px;
+    border-radius: 16px;
+}
+
+.dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background-color: #ccc;
+    transition: background-color 0.3s ease;
+}
+
+.activeDot {
+    background-color: #333333;
+}
+
+.active {
+    background-color: #333;
+}
+
+.colorDot,
+.colorDotMulti {
+    display: flex;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #ccc;
+    margin: 4px;
+    transition: none !important;
+}
+
+.dotHalf {
+    width: 50%;
+    height: 100%;
+}
+
+.selected {
+    border-color: #333333;
+    transform: scale(1.1);
+}
+
+.colorSelector {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 16px;
+}
+
+.colorLabel {
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.colorOptions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 400px;
+    padding: 10px 20px;
+    gap: 10px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+    color: #333333;
+}
+
+
+.category {
+    font-size: 1em;
+    color: #777;
+}
+
+.selectedSize {
+    background-color: #333 !important;
+    color: #fff !important;
+    transform: scale(1.05);
+}
+
+.priceSection {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.oldPrice {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 1rem;
+}
+
+.price {
+    color: #333333;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.description {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.sizeContainer {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.sizeBtn {
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #ffffff;
+    font-size: 0.9rem;
+    cursor: pointer;
+    color: #333333;
+    outline: none;
+    transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+    -webkit-tap-highlight-color: transparent
+}
+
+.sizeBtn:active,
+.sizeBtn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.heart {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    border: none;
+    background-color: #FFFFFF00;
+    cursor: pointer;
+    margin: 0;
+    padding: 10px 10px;
+    outline: none;
+    color: #FFFFFFCD;
+    line-height: 0;
+    transition: transform 0.15s ease, color 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.filled {
+    color: red;
+}
+
+.heart:focus {
+    outline: none;
+    box-shadow: none;
+    transform: scale(1.1);
+}
+
+.heart:active {
+    transform: scale(0.9);
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    margin-top: 5px;
+}
+
+.addToBag {
+    width: 400px;
+    padding: 12px 5px;
+    background-color: #333333;
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 0;
+}
+
+.addToBag:focus {
+    outline: none;
+}

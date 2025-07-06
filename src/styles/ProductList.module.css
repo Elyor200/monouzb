@@ -1,0 +1,73 @@
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.message {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 1rem;
+    color: #777;
+}
+
+.imageCard {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease;
+}
+
+.imageGallery {
+    width: 100%;
+    height: 140px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f6f6f6;
+}
+
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #333;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    animation: spin 0.8s linear infinite;
+    margin: auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loadingWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+}
+
+
+.image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    width: 330px;
+    font-weight: 500;
+    color: #333333AE;
+}
+
+.imageDescription {
+    font-size: 0.85rem;
+    color: #555;
+    text-align: center;
+    margin: 8px 0 10px;
+}

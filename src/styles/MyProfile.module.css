@@ -1,0 +1,118 @@
+.myProfileContainer {
+    padding: 10px;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+}
+
+.profileCard {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    padding: 16px;
+}
+
+.profileTop {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    font-weight: 500;
+}
+
+.profileImage {
+    padding: 2px;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #27ae60;
+}
+
+.avatarFallback {
+    width: 64px;
+    height: 64px;
+    background-color: #ffffff;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: bold;
+    padding: 5px;
+    border: 2px solid #ccc;
+    box-sizing: border-box;
+}
+
+.userInfo h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: left;
+    color: #333333;
+}
+
+.userInfo p {
+    margin: 2px 0 0;
+    color: #888;
+    font-size: 14px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.item, .staticItem {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 15px 8px;
+    background-color: #f6f6f6;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.item:hover {
+    background-color: #ececec;
+}
+
+.item span,
+.staticItem span:not(.rightText) {
+    margin-left: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #333;
+}
+
+.staticItem {
+    cursor: default;
+}
+
+.rightText {
+    font-size: 14px;
+    color: #33333390;
+    font-weight: 500;
+    margin-left: auto;
+}
+
+.exit {
+    display: flex;
+    align-items: center;
+    padding: 15px 8px;
+    border-radius: 8px;
+    margin-top: 12px;
+    color: red;
+    cursor: pointer;
+    font-weight: 500;
+    gap: 12px;
+    background-color: #ffecec;
+    transition: background-color 0.2s ease;
+}
+
+.exit:hover {
+    background-color: #ffdddd;
+}

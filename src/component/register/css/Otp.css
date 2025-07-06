@@ -1,0 +1,218 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body.code-confirm-page {
+    overflow-y: hidden;
+    background-color: #ffffff;
+}
+
+.otp-wrapper {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    overflow: hidden;
+}
+
+.otp-container {
+    width: 100%;
+    max-width: 330px;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 12px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.otp-container h1 {
+    font-size: 2.5rem;
+    color: #333333;
+    margin: 0;
+    font-weight: 900;
+}
+
+.otp-container p {
+    font-size: 0.95rem;
+    color: #444;
+    line-height: 1.2;
+    margin: 0;
+    text-align: center;
+}
+
+.otp-container input[type="text"] {
+    padding: 15px 16px;
+    font-size: 16px;
+    color: #333333;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: border-color 0.3s ease;
+    width: 100%;
+    background-color: #ffffff;
+}
+
+.otp-container input[type="text"]:focus {
+    border-color: #4a90e2;
+}
+
+.otp-container .otp-button {
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    color: #ffffff;
+    background-color: #333333;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-focus-ring-color: transparent;
+}
+
+.otp-button .spinner-only {
+    width: 20px;
+    height: 20px;
+    border: 3px solid #ffffff;
+    border-top: 3px solid #4a90e2;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.otp-container .otp-resend {
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-focus-ring-color: transparent;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+    box-shadow: 0 0 0px 1000px white inset !important;
+    -webkit-text-fill-color: #000 !important;
+}
+
+.otp-resend {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: 1px solid #1f7be4;
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #1f7be4;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.otp-resend:not(.loading) {
+    border: 1px solid #1f7be4;
+    background-color: #ffffff;
+    color: #1F7BE4E2;
+}
+
+.otp-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 1.2rem 0;
+}
+
+.otp-digit {
+    width: 45px;
+    height: 55px;
+    font-size: 1.5rem;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #333;
+    transition: border-color 0.3s ease;
+}
+
+.otp-digit:focus {
+    border-color: #4a90e2;
+    outline: none;
+}
+
+.logo-wrapper {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: 10;
+    pointer-events: none;
+}
+
+.brand-logo-top-left {
+    width: 80px;
+    height: auto;
+}
+
+
+@media (max-width: 480px) {
+    .otp-container {
+        padding: 1rem;
+        border-radius: 10px;
+    }
+
+    .otp-container h1 {
+        font-size: 2.5rem;
+    }
+
+    .otp-container input[type="text"] {
+        font-size: 0.95rem;
+        padding: 12px;
+    }
+
+    .otp-button,
+    .otp-resend {
+        font-size: 0.95rem;
+        padding: 12px;
+    }
+
+    .otp-digit {
+        width: 40px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+
+    .logo-wrapper {
+        pointer-events: none;
+    }
+
+    .brand-logo-top-left {
+        width: 80px;
+        height: auto;
+    }
+}
+
+@media (max-height: 735px) {
+    .logo-wrapper {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translate(-50%);
+        z-index: 10;
+    }
+
+    .brand-logo-top-left {
+        width: 50px;
+        height: auto;
+    }
+}
+
+@media (max-height: 480px) {
+    .logo-wrapper {
+        display: none;
+    }
+}
