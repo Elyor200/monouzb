@@ -7,6 +7,7 @@ import ProductList from "../component/ProductList.jsx";
 import BottomNav from "../component/BottomNav.jsx";
 import { motion } from "framer-motion";
 import {FiBell} from "react-icons/fi";
+import api from "../component/services/api.jsx";
 
 
 const Home = () => {
@@ -17,7 +18,7 @@ const Home = () => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await axios.get("https://8c77-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app/v1/categories/getAllCategories");
+                const response = await api.get("/v1/categories/getAllCategories");
                 const categoryNames = response.data.map(cat => cat.category);
                 setCategories(['All', ...categoryNames]);
             } catch (error) {

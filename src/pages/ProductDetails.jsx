@@ -6,6 +6,7 @@ import React from "react";
 import {AiFillHeart, AiOutlineArrowLeft, AiOutlineHeart} from "react-icons/ai";
 import {toast} from "react-toastify";
 import {useCart} from "../context/CartContext.jsx";
+import api from "../component/services/api.jsx";
 
 const ProductDetails = () => {
     const { productId } = useParams();
@@ -29,7 +30,7 @@ const ProductDetails = () => {
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const response = await axios.get(`https://8c77-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app/v1/products/getByProductId?productId=${productId}`);
+                const response = await api.get(`/v1/products/getByProductId?productId=${productId}`);
                 setProduct(response.data);
             } catch (err) {
                 console.log("Failed to fetch product", err)
@@ -38,7 +39,7 @@ const ProductDetails = () => {
 
         const fetchFavoriteStatus = async () => {
             try {
-                const res = await axios.get("https://8c77-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app/v1/favorite-products/isFavoriteProduct", {
+                const res = await api.get("v1/favorite-products/isFavoriteProduct", {
                     params: {
                         telegramUserId: telegramUserId,
                         productId: productId,
@@ -81,7 +82,7 @@ const ProductDetails = () => {
         try {
 
             const productId = product.productId;
-            await axios.post("https://8c77-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app/v1/favorite-products/addFavoriteProduct", {
+            await api.post("/v1/favorite-products/addFavoriteProduct", {
                 telegramUserId: telegramUserId,
                 productId
             });
@@ -186,7 +187,7 @@ const ProductDetails = () => {
         const telegramUserId = localStorage.getItem("telegramUserId");
 
         try {
-            const response = await axios.post(`https://8c77-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app/v1/cart/add?telegramUserId=${telegramUserId}`, {
+            const response = await api.post(`/v1/cart/add?telegramUserId=${telegramUserId}`, {
                 productId: product.productId,
                 color: selectedColor,
                 size: selectedSize,
@@ -226,7 +227,7 @@ const ProductDetails = () => {
                         <div key={i} className={styles.imageBox}>
                             <img
                                 key={i}
-                                src={`https://8c77-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app${url}`}
+                                src={`https://3381-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app${url}`}
                                 alt={`${product?.name || "Product"} (${i + 1})`}
                                 className={styles.image}
                             />

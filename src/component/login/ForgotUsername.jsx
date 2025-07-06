@@ -6,6 +6,7 @@ import './ForgotUsername.css'
 import React from "react";
 import {useNavigate} from "react-router-dom";
 import OtpInput from "../register/OtpInput.jsx";
+import api from "../services/api.jsx";
 
 const ForgotUsername = () => {
     const [phoneNumber, setPhoneNumber] = useState("");
@@ -48,7 +49,7 @@ const ForgotUsername = () => {
         setLoading(true);
 
         try {
-            const response = await axios.post("https://8c77-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app/v1/users/forgot-username", {
+            const response = await api.post("/v1/users/forgot-username", {
                 phoneNumber: cleanedPhone,
             });
 
@@ -83,8 +84,8 @@ const ForgotUsername = () => {
 
         setLoading(true);
         try {
-            const response = await axios.post(
-                "https://8c77-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app/v1/phoneVerification/verify",
+            const response = await api.post(
+                "/v1/phoneVerification/verify",
                 {},
                 { params: { phoneNumber, code: inputCode } }
             );
@@ -128,7 +129,7 @@ const ForgotUsername = () => {
         setError("");
         setLoading(true);
         try {
-            const response = await axios.put("https://8c77-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app/v1/users/reset-username", {
+            const response = await api.put("/v1/users/reset-username", {
                 phoneNumber: phoneNumber,
                 code,
                 newUsername

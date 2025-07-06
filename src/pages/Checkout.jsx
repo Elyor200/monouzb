@@ -7,6 +7,7 @@ import {formatUzbekPhone} from "../component/utils/phoneUtils.js";
 import {toast} from "react-toastify";
 import axios from "axios";
 import {useCart} from "../context/CartContext.jsx";
+import api from "../component/services/api.jsx";
 
 const Checkout = () => {
     const navigate = useNavigate();
@@ -43,7 +44,7 @@ const Checkout = () => {
     const handlePlaceOrder = async () => {
         setIsPlacingOrder(true);
         try {
-            await axios.post("https://8c77-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app/v1/orders/place-order", payload);
+            await api.post("/v1/orders/place-order", payload);
             toast.success("Order placed!", {
                 position: "top-right",
                 autoClose: 2000,
@@ -64,7 +65,7 @@ const Checkout = () => {
 
     const fetchData = async () => {
         try {
-            const res = await fetch(`https://8c77-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app/v1/cart/getCart?telegramUserId=${telegramUserId}`);
+            const res = await fetch(`https://3381-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app/v1/cart/getCart?telegramUserId=${telegramUserId}`);
             const data = await res.json();
             if (data?.items && Array.isArray(data.items)) {
                 setCartItems(data.items);
@@ -131,7 +132,7 @@ const Checkout = () => {
 
         const fetchUserInfo = async () => {
             try {
-                const res = await fetch(`https://8c77-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app/v1/users/getUserByTelegramUserId?telegramUserId=${telegramUserId}`);
+                const res = await fetch(`https://3381-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app/v1/users/getUserByTelegramUserId?telegramUserId=${telegramUserId}`);
                 const data = await res.json();
 
                 const fullName = `${data.firstName} ${data.lastName}`.trim();
@@ -249,7 +250,7 @@ const Checkout = () => {
                     {cartItems.map((item) => (
                         <div key={item.cartItemId} className={styles.cartItem}>
                             <div className={styles.imageContainer}>
-                                <img src={`https://8c77-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app${item.imageUrl}`} alt={item.productName} className={styles.cartImage} />
+                                <img src={`https://3381-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app${item.imageUrl}`} alt={item.productName} className={styles.cartImage} />
                             </div>
                             <div className={styles.cartInfo}>
                                 <p className={styles.productName}>{item.productName}</p>

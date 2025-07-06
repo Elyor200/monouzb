@@ -3,6 +3,7 @@ import axios from "axios";
 import ProductCart from "./ProductCart.jsx";
 import React from "react";
 import styles from '../styles/ProductList.module.css'
+import api from "./services/api.jsx";
 
 const ProductList = ({ selectedCategory }) => {
     const [products, setProducts] = useState([]);
@@ -12,7 +13,7 @@ const ProductList = ({ selectedCategory }) => {
         setLoading(true);
         try {
             const telegramUserId = localStorage.getItem("telegramUserId");
-            const response = await axios.get("https://8c77-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app/v1/products/getAllProducts", {
+            const response = await api.get("/v1/products/getAllProducts", {
                 params: { telegramUserId }
             });
 

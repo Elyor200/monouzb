@@ -22,7 +22,7 @@ const ProductCartFavorite = ({product, isFavorite, onToggleFavorite}) => {
     return (
         <div className={styles.productCard} onClick={handleCardClick}>
             <div className={styles.imageContainer}>
-                <img src={`https://8c77-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app${product.imageUrl?.[0]}`} alt={product.name} />
+                <img src={`https://3381-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app${product.imageUrl?.[0]}`} alt={product.name} />
             </div>
 
             <div className={styles.infoContainer}>

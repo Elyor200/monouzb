@@ -5,6 +5,7 @@ import axios from "axios";
 import './Login.css'
 import React from "react";
 import { formatUzbekPhone } from "../utils/phoneUtils.js";
+import api from "../services/api.jsx";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -44,7 +45,7 @@ const Login = () => {
         setLoading(true);
 
         try {
-            const response = await axios.post("https://8c77-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app/v1/users/login", {
+            const response = await api.post("/v1/users/login", {
                 username: form.username,
                 phoneNumber: cleanedPhone,
             });

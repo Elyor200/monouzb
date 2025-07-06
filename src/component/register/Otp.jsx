@@ -6,6 +6,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import { FaSpinner } from "react-icons/fa";
 import { toast } from "react-toastify";
 import OtpInput from "./OtpInput.jsx";
+import api from "../services/api.jsx";
 
 
 const Otp = () => {
@@ -36,7 +37,7 @@ const Otp = () => {
             const storedId = localStorage.getItem("telegramUserId");
             const telegramUserId = storedId ? Number(storedId) : null;
 
-            await axios.post(`https://8c77-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app/v1/phoneVerification/send-verification-code`,
+            await api.post(`/v1/phoneVerification/send-verification-code`,
                 {},
                 {
                     params: {
@@ -74,8 +75,8 @@ const Otp = () => {
 
         setLoading(true);
         try {
-            const response = await axios.post(
-                "https://8c77-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app/v1/phoneVerification/verify",
+            const response = await api.post(
+                "/v1/phoneVerification/verify",
                 {},
                 { params: { phoneNumber, code: trimmedCode } }
             );

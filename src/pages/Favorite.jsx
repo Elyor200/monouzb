@@ -3,6 +3,7 @@ import axios from "axios";
 import React from "react";
 import styles from '../styles/Favorite.module.css'
 import ProductCartFavorite from "../component/ProductCartFavorite.jsx";
+import api from "../component/services/api.jsx";
 
 const Favorite = () => {
     const [favorites, setFavorites] = useState([]);
@@ -11,7 +12,7 @@ const Favorite = () => {
     useEffect(() => {
         const fetchFavorites = async () => {
             try {
-                const res = await axios.get('https://8c77-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app/v1/favorite-products/getFavoriteProductsByTelegramUserId', {
+                const res = await api.get('/v1/favorite-products/getFavoriteProductsByTelegramUserId', {
                     params: {telegramUserId}
                 })
                 console.log("Favorites: ", res.data);
@@ -26,7 +27,7 @@ const Favorite = () => {
 
     const handleToggleFavorite = async (productId) => {
         try {
-            await axios.post("https://8c77-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app/v1/favorite-products/addFavoriteProduct", {
+            await api.post("/v1/favorite-products/addFavoriteProduct", {
                 telegramUserId,
                 productId,
             });

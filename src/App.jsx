@@ -20,6 +20,7 @@ import Orders from "./pages/Orders.jsx";
 import Checkout from "./pages/Checkout.jsx";
 import OrderSuccess from "./component/OrderSuccess.jsx";
 import PrivateRoute from "./component/PrivateRoute.jsx";
+import api from "./component/services/api.jsx";
 
 const App = () => {
     const { setCartCount } = useCart();
@@ -28,7 +29,7 @@ const App = () => {
     useEffect(() => {
         const fetchCartCount = async () => {
             try {
-                const res = await axios.get(`https://8c77-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app/v1/cart/getCart?telegramUserId=${telegramUserId}`);
+                const res = await api.get(`/v1/cart/getCart?telegramUserId=${telegramUserId}`);
                 setCartCount(res.data.items.length);
             } catch (error) {
                 console.log(error);

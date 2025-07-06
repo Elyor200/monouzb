@@ -6,6 +6,7 @@ import {MdOutlineHistory} from "react-icons/md";
 import styles from '../styles/MyProfile.module.css'
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+import api from "../component/services/api.jsx";
 
 
 const MyProfile = () => {
@@ -25,7 +26,7 @@ const MyProfile = () => {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const res = await axios.get("https://8c77-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app/v1/users/getUserByTelegramUserId", {
+                const res = await api.get("v1/users/getUserByTelegramUserId", {
                     params: {telegramUserId}
                 });
                 setUserData(res.data);
@@ -36,10 +37,10 @@ const MyProfile = () => {
 
         const fetchTelegramAvatar = async () => {
             try {
-                const res = await axios.get(`https://8c77-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app/v1/telegram/getUserAvatar`, {
+                setAvatarUrl(res.data);
+                const res = await api.get(`/v1/telegram/getUserAvatar`, {
                     params: {telegramUserId}
                 });
-                setAvatarUrl(res.data);
             } catch (error) {
                 console.error("Avatar fetch error: ", error);
             }

@@ -4,6 +4,7 @@ import axios from "axios"
 import './css/Register.css'
 import {formatUzbekPhone} from "../utils/phoneUtils.js";
 import {toast} from "react-toastify";
+import api from "../services/api.jsx";
 
 const Register = () => {
     const navigate = useNavigate();
@@ -53,7 +54,7 @@ const Register = () => {
             localStorage.setItem("user", JSON.stringify(form))
             const phoneToSend = form.phoneNumber.replace(/\s+/g, "");
 
-            const response = await axios.post("https://8c77-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app/v1/users/create-user", {
+            const response = await api.post("/v1/users/create-user", {
                 ...form,
                 phoneNumber: phoneToSend
             });
@@ -67,7 +68,7 @@ const Register = () => {
 
             localStorage.setItem("user", JSON.stringify(user));
 
-            await axios.post(`https://8c77-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app/v1/phoneVerification/send-verification-code`,
+            await api.post(`/v1/phoneVerification/send-verification-code`,
                 {},
                 {
                     params: {

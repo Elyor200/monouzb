@@ -9,6 +9,7 @@ import {FiTrash2} from "react-icons/fi";
 import {BiMinus, BiPlus} from "react-icons/bi";
 import {useNavigate} from "react-router-dom";
 import Checkout from "./Checkout.jsx";
+import api from "../component/services/api.jsx";
 
 const Cart = () => {
     const [cartItems, setCartItems] = useState({ items: [], totalAmount: 0 });
@@ -19,7 +20,7 @@ const Cart = () => {
     useEffect(() => {
         const fetchCart = async () => {
             try {
-                const res = await axios.get(`https://8c77-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app/v1/cart/getCart?telegramUserId=${telegramUserId}`);
+                const res = await api.get(`/v1/cart/getCart?telegramUserId=${telegramUserId}`);
                 setCartItems(res.data);
             } catch (err) {
                 console.log("Error fetching cart", err);
@@ -48,7 +49,7 @@ const Cart = () => {
     const increment = async (item) => {
         try {
             const newQuantity = item.quantity + 1;
-            const res = await axios.put(`https://8c77-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app/v1/cart/update/${item.cartItemId}?telegramUserId=${telegramUserId}&quantity=${newQuantity}`);
+            const res = await api.put(`/v1/cart/update/${item.cartItemId}?telegramUserId=${telegramUserId}&quantity=${newQuantity}`);
             updateItemInState(res.data.items.find(i => i.cartItemId === item.cartItemId));
         } catch (err) {
             console.log("Error updating cart", err);
@@ -59,7 +60,7 @@ const Cart = () => {
         if (item.quantity <= 1) return;
         try {
             const newQuantity = item.quantity - 1;
-            const res = await axios.put(`https://8c77-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app/v1/cart/update/${item.cartItemId}?telegramUserId=${telegramUserId}&quantity=${newQuantity}`);
+            const res = await api.put(`/v1/cart/update/${item.cartItemId}?telegramUserId=${telegramUserId}&quantity=${newQuantity}`);
             updateItemInState(res.data.items.find(i => i.cartItemId === item.cartItemId))
         } catch (err) {
             console.log("Error updating cart", err);
@@ -68,7 +69,7 @@ const Cart = () => {
 
     const removeItem = async (item) => {
         try {
-            await axios.delete(`https://8c77-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app/v1/cart/remove/${item.cartItemId}?telegramUserId=${telegramUserId}`);
+            await api.delete(`/v1/cart/remove/${item.cartItemId}?telegramUserId=${telegramUserId}`);
 
             setCartItems(prevState => {
                 const updatedItems = prevState.items.filter(i => i.cartItemId !== item.cartItemId);
@@ -108,7 +109,7 @@ const Cart = () => {
                         <div key={index} className={styles.cartItem}>
                             <div className={styles.imageContainer}>
                                 <img
-                                    src={`https://8c77-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app${item.imageUrl}`}
+                                    src={`https://3381-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app${item.imageUrl}`}
                                     alt={item.productName}
                                     className={styles.productImage}
                                     onClick={() => navigate(`/product/${item.productId}`, {
