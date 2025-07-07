@@ -109,7 +109,7 @@ const Cart = () => {
                         <div key={index} className={styles.cartItem}>
                             <div className={styles.imageContainer}>
                                 <img
-                                    src={`https://3381-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app${item.imageUrl}`}
+                                    src={`https://monouzbbackend.onrender.com/${item.imageUrl}`}
                                     alt={item.productName}
                                     className={styles.productImage}
                                     onClick={() => navigate(`/product/${item.productId}`, {

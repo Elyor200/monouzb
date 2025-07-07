@@ -40,7 +40,7 @@ const ProductCart = ({product,  onFavoriteToggle}) => {
         <div className={styles.card} onClick={() => navigate(`/product/${product.productId}`)}>
             <div className={styles.imageWrapper}>
                 <img
-                    src={`https://3381-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app${product.imageUrl?.[0]}`}
+                    src={`https://monouzbbackend.onrender.com/${product.imageUrl?.[0]}`}
                     alt={product.name}
                     className={styles.image}
                 />

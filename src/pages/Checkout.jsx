@@ -65,7 +65,7 @@ const Checkout = () => {
 
     const fetchData = async () => {
         try {
-            const res = await fetch(`https://3381-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app/v1/cart/getCart?telegramUserId=${telegramUserId}`);
+            const res = await fetch(`https://monouzbbackend.onrender.com/v1/cart/getCart?telegramUserId=${telegramUserId}`);
             const data = await res.json();
             if (data?.items && Array.isArray(data.items)) {
                 setCartItems(data.items);
@@ -132,7 +132,7 @@ const Checkout = () => {
 
         const fetchUserInfo = async () => {
             try {
-                const res = await fetch(`https://3381-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app/v1/users/getUserByTelegramUserId?telegramUserId=${telegramUserId}`);
+                const res = await fetch(`https://monouzbbackend.onrender.com/v1/users/getUserByTelegramUserId?telegramUserId=${telegramUserId}`);
                 const data = await res.json();
 
                 const fullName = `${data.firstName} ${data.lastName}`.trim();
@@ -250,7 +250,7 @@ const Checkout = () => {
                     {cartItems.map((item) => (
                         <div key={item.cartItemId} className={styles.cartItem}>
                             <div className={styles.imageContainer}>
-                                <img src={`https://3381-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app${item.imageUrl}`} alt={item.productName} className={styles.cartImage} />
+                                <img src={`https://monouzbbackend.onrender.com/${item.imageUrl}`} alt={item.productName} className={styles.cartImage} />
                             </div>
                             <div className={styles.cartInfo}>
                                 <p className={styles.productName}>{item.productName}</p>
