@@ -18,7 +18,7 @@ const ProductCart = ({product,  onFavoriteToggle}) => {
 
     const toggleFavorite = async () => {
         try {
-            const res = await axios.post("https://8c77-2a05-45c2-4031-9e00-b9fc-7a3e-1859-c5c6.ngrok-free.app/v1/favorite-products/addFavoriteProduct", {
+            const res = await axios.post("https://monouzbbackend.onrender.com/v1/favorite-products/addFavoriteProduct", {
                 telegramUserId: telegramUserId,
                 productId
             });
@@ -40,7 +40,7 @@ const ProductCart = ({product,  onFavoriteToggle}) => {
         <div className={styles.card} onClick={() => navigate(`/product/${product.productId}`)}>
             <div className={styles.imageWrapper}>
                 <img
-                    src={`https://monouzbbackend.onrender.com/${product.imageUrl?.[0]}`}
+                    src={product.imageUrl?.[0]}
                     alt={product.name}
                     className={styles.image}
                 />

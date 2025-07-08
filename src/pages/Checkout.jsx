@@ -250,7 +250,7 @@ const Checkout = () => {
                     {cartItems.map((item) => (
                         <div key={item.cartItemId} className={styles.cartItem}>
                             <div className={styles.imageContainer}>
-                                <img src={`https://monouzbbackend.onrender.com/${item.imageUrl}`} alt={item.productName} className={styles.cartImage} />
+                                <img src={item.imageUrl} alt={item.productName} className={styles.cartImage} />
                             </div>
                             <div className={styles.cartInfo}>
                                 <p className={styles.productName}>{item.productName}</p>
