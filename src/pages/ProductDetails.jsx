@@ -226,8 +226,7 @@ const ProductDetails = () => {
                     {imageUrls.map((url, i) => (
                         <div key={i} className={styles.imageBox}>
                             <img
-                                key={i}
-                                src={`https://monouzbbackend.onrender.com${url}`}
+                                src={url}
                                 alt={`${product?.name || "Product"} (${i + 1})`}
                                 className={styles.image}
                             />
