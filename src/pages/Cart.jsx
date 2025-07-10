@@ -16,14 +16,18 @@ const Cart = () => {
     const telegramUserId = localStorage.getItem("telegramUserId");
     const { setCartCount } = useCart();
     const navigate = useNavigate();
+    const [cartLoading, setCartLoading] = useState(false);
 
     useEffect(() => {
         const fetchCart = async () => {
             try {
+                setCartLoading(true);
                 const res = await api.get(`/v1/cart/getCart?telegramUserId=${telegramUserId}`);
                 setCartItems(res.data);
             } catch (err) {
                 console.log("Error fetching cart", err);
+            } finally {
+                setCartLoading(false);
             }
         };
 
@@ -95,6 +99,14 @@ const Cart = () => {
             maximumFractionDigits: 0,
         }).format(price);
     };
+
+    if (cartLoading) {
+        return (
+            <div className={styles.loadingContainer}>
+                <div className={styles.spinner}></div>
+            </div>
+        )
+    }
 
     return (
         <div className={styles.cartWrapper}>

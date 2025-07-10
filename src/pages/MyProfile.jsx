@@ -37,10 +37,10 @@ const MyProfile = () => {
 
         const fetchTelegramAvatar = async () => {
             try {
-                setAvatarUrl(res.data);
                 const res = await api.get(`/v1/telegram/getUserAvatar`, {
                     params: {telegramUserId}
                 });
+                setAvatarUrl(res.data);
             } catch (error) {
                 console.error("Avatar fetch error: ", error);
             }

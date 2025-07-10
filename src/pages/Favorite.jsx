@@ -8,10 +8,12 @@ import api from "../component/services/api.jsx";
 const Favorite = () => {
     const [favorites, setFavorites] = useState([]);
     const telegramUserId = localStorage.getItem("telegramUserId");
+    const [favoriteLoading, setFavoriteLoading] = useState(false);
 
     useEffect(() => {
         const fetchFavorites = async () => {
             try {
+                setFavoriteLoading(true);
                 const res = await api.get('/v1/favorite-products/getFavoriteProductsByTelegramUserId', {
                     params: {telegramUserId}
                 })
@@ -19,6 +21,8 @@ const Favorite = () => {
                 setFavorites(res.data);
             } catch (error) {
                 console.error(error);
+            } finally {
+                setFavoriteLoading(false);
             }
         };
 
@@ -36,6 +40,14 @@ const Favorite = () => {
             console.log("Failed to update favorite", err);
         }
     };
+
+    if (favoriteLoading) {
+        return (
+            <div className={styles.loadingContainer}>
+                <div className={styles.spinner}></div>
+            </div>
+        )
+    }
 
     return (
         <div className={styles.favoritePage}>

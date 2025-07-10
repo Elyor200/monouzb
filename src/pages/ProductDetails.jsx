@@ -25,15 +25,20 @@ const ProductDetails = () => {
     const location = useLocation();
     const selectedColorFromCart = location.state?.selectedColor;
     const selectedSizeFromCart = location.state?.selectedSize;
+    const [loading, setLoading] = useState(true);
+    const [isAddingToCart, setAddingToCart] = useState(false);
 
 
     useEffect(() => {
         const fetchProduct = async () => {
             try {
+                setLoading(true);
                 const response = await api.get(`/v1/products/getByProductId?productId=${productId}`);
                 setProduct(response.data);
             } catch (err) {
                 console.log("Failed to fetch product", err)
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -187,6 +192,7 @@ const ProductDetails = () => {
         const telegramUserId = localStorage.getItem("telegramUserId");
 
         try {
+            setAddingToCart(true);
             const response = await api.post(`/v1/cart/add?telegramUserId=${telegramUserId}`, {
                 productId: product.productId,
                 color: selectedColor,
@@ -208,12 +214,21 @@ const ProductDetails = () => {
                 position: "top-right",
                 autoClose: 2000,
             })
+        } finally {
+            setAddingToCart(false);
         }
     }
 
     const imageUrls = product?.imageUrl || [];
 
-    if (!product) return <div className={styles.loading}>Loading...</div>;
+    // if (!product) return <div className={styles.loading}>Loading...</div>;
+    if (loading || !product) {
+        return (
+            <div className={styles.loadingContainer}>
+                <div className={styles.spinner}></div>
+            </div>
+        )
+    }
 
     return (
         <div className={styles.detailWrapper}>
@@ -298,7 +313,13 @@ const ProductDetails = () => {
             </div>
 
             <div className={styles.buttonContainer}>
-                <button className={styles.addToBag} onClick={handleAddToCart}>+ Add to Bag</button>
+                <button className={styles.addToBag} onClick={handleAddToCart} disabled={isAddingToCart}>
+                    {isAddingToCart ? (
+                        <div className={styles.spinnerBtn}></div>
+                    ) : (
+                        '+ Add to Bag'
+                    )}
+                </button>
             </div>
         </div>
     );

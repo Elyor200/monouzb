@@ -29,6 +29,7 @@ const Checkout = () => {
     const phoneToSend = form.phoneNumber.replace(/\s+/g, "");
     const { setCartCount } = useCart();
     const [isPlacingOrder, setIsPlacingOrder] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const payload = {
         telegramUserId: telegramUserId,
@@ -65,6 +66,7 @@ const Checkout = () => {
 
     const fetchData = async () => {
         try {
+            setLoading(true);
             const res = await fetch(`https://monouzbbackend.onrender.com/v1/cart/getCart?telegramUserId=${telegramUserId}`);
             const data = await res.json();
             if (data?.items && Array.isArray(data.items)) {
@@ -76,6 +78,8 @@ const Checkout = () => {
         } catch (err) {
             console.error(err);
             setCartItems([]);
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -247,25 +251,33 @@ const Checkout = () => {
 
             <section className={styles.section}>
                 <div className={styles.orderSummary}>
-                    {cartItems.map((item) => (
-                        <div key={item.cartItemId} className={styles.cartItem}>
-                            <div className={styles.imageContainer}>
-                                <img
-                                    src={
-                                        item.imageUrl?.startsWith("http")
-                                            ? item.imageUrl
-                                            : `https://monouzbbackend.onrender.com${item.imageUrl}`
-                                    }
-                                    alt={item.productName}
-                                    className={styles.cartImage}
-                                />
-                            </div>
-                            <div className={styles.cartInfo}>
-                                <p className={styles.productName}>{item.productName}</p>
-                                <p className={styles.productPrice}>{formatPrice(item.productPrice)}</p>
-                            </div>
+                    {loading ? (
+                        <div className={styles.spinnerContainer}>
+                            <div className={styles.spinner}></div>
                         </div>
-                    ))}
+                    ) : (
+                        <>
+                            {cartItems.map((item) => (
+                                <div key={item.cartItemId} className={styles.cartItem}>
+                                    <div className={styles.imageContainer}>
+                                        <img
+                                            src={
+                                                item.imageUrl?.startsWith("http")
+                                                    ? item.imageUrl
+                                                    : `https://monouzbbackend.onrender.com${item.imageUrl}`
+                                            }
+                                            alt={item.productName}
+                                            className={styles.cartImage}
+                                        />
+                                    </div>
+                                    <div className={styles.cartInfo}>
+                                        <p className={styles.productName}>{item.productName}</p>
+                                        <p className={styles.productPrice}>{formatPrice(item.productPrice)}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </>
+                    )}
                     <div className={styles.totalAmount}>
                         Total <strong>{formatPrice(totalAmount)}</strong>
                     </div>
