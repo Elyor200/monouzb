@@ -41,6 +41,21 @@ const Checkout = () => {
         lat: addressDetails.lat,
         lng: addressDetails.lng,
     }
+    useEffect(() => {
+        const savedAddress = localStorage.getItem("selectedDeliveryAddress");
+        if (savedAddress) {
+            try {
+                const parsed = JSON.parse(savedAddress);
+                if (parsed && parsed.lat && parsed.lng) {
+                    setAddressDetails(parsed);
+                    setForm((prev) => ({...prev, address: parsed}))
+                    setDeliveryMethod("deliver")
+                }
+            } catch (error) {
+                console.error("Failed to load address",error);
+            }
+        }
+    }, []);
 
     const handlePlaceOrder = async () => {
         setIsPlacingOrder(true);
@@ -53,6 +68,7 @@ const Checkout = () => {
             setCartItems([]);
             setTotalAmount(0)
             setCartCount(0)
+            localStorage.removeItem("selectedDeliveryAddress");
             await fetchData();
             navigate("/order-success")
         } catch (error) {
@@ -202,6 +218,7 @@ const Checkout = () => {
                             onAddressSelect={(data) => {
                                 setAddressDetails(data);
                                 setForm((prev) => ({ ...prev, address: data }));
+                                localStorage.setItem("selectedDeliveryAddress", JSON.stringify(data));
                             }}
                         />
                         {addressDetails?.address && (

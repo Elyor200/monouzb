@@ -146,6 +146,7 @@ const ProductDetails = () => {
             orange: "#FFA500",
             darkblue: "#09125f",
             wineRed: "#500909FF",
+            wine: "#500909FF"
         }
 
         const normalized = colorName.toLowerCase().trim();
