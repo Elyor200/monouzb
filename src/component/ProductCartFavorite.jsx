@@ -19,10 +19,15 @@ const ProductCartFavorite = ({product, isFavorite, onToggleFavorite}) => {
         navigate(`/product/${product.productId}`);
     }
 
+    const getImageUrl = (url) => {
+        if (!url) return '';
+        return url.startsWith('http') ? url : `https://monouzbbackend.onrender.com${url}`;
+    };
+
     return (
         <div className={styles.productCard} onClick={handleCardClick}>
             <div className={styles.imageContainer}>
-                <img src={`https://monouzbbackend.onrender.com${product.imageUrl?.[0]}`} alt={product.name} />
+                <img src={getImageUrl(product.imageUrl?.[0])} alt={product.name} />
             </div>
 
             <div className={styles.infoContainer}>

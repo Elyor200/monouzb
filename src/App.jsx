@@ -21,6 +21,8 @@ import Checkout from "./pages/Checkout.jsx";
 import OrderSuccess from "./component/OrderSuccess.jsx";
 import PrivateRoute from "./component/PrivateRoute.jsx";
 import api from "./component/services/api.jsx";
+import OrderHistory from "./pages/OrderHistory.jsx";
+import OrderDetails from "./pages/OrderDetails.jsx";
 
 const App = () => {
     const { setCartCount } = useCart();
@@ -78,7 +80,12 @@ const App = () => {
                     } />
                     <Route path="/orders" element={
                         <PrivateRoute>
-                            <MainLayout><Orders /></MainLayout>
+                            <MainLayout><OrderHistory /></MainLayout>
+                        </PrivateRoute>
+                    } />
+                    <Route path="/orders/:orderId" element={
+                        <PrivateRoute>
+                            <OrderDetails/>
                         </PrivateRoute>
                     } />
                     <Route path="/checkout" element={

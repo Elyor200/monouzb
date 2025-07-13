@@ -15,6 +15,7 @@ const MyProfile = () => {
     const photoUrl = localStorage.getItem("photoUrl");
     const [userData, setUserData] = useState(null);
     const [avatarUrl, setAvatarUrl] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const handleExit = () => {
         localStorage.clear();
@@ -24,6 +25,7 @@ const MyProfile = () => {
     const firstLetter = userData?.firstName?.charAt(0).toUpperCase();
 
     useEffect(() => {
+        setLoading(true);
         const fetchUserData = async () => {
             try {
                 const res = await api.get("v1/users/getUserByTelegramUserId", {
@@ -32,6 +34,8 @@ const MyProfile = () => {
                 setUserData(res.data);
             } catch (error) {
                 console.log(error);
+            } finally {
+                setLoading(false);
             }
         }
 
@@ -64,8 +68,14 @@ const MyProfile = () => {
                         </div>
                     )}
                     <div className={styles.userInfo}>
-                        <h2>{userData?.firstName}</h2>
-                        <p>{userData?.phoneNumber}</p>
+                        {loading ? (
+                            <div className={styles.nameSpinner}></div>
+                        ) : (
+                            <>
+                                <h2>{userData?.firstName}</h2>
+                                <p>{userData?.phoneNumber}</p>
+                            </>
+                        )}
                     </div>
                 </div>
                 <div className={styles.menu}>

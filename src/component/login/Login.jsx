@@ -56,6 +56,7 @@ const Login = () => {
 
             localStorage.setItem("telegramUserId", response.data.telegramUserId);
             localStorage.setItem("username", response.data.username);
+            localStorage.setItem("phoneNumber", cleanedPhone);
             navigate("/home");
 
             setTimeout(() => {

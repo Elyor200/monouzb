@@ -30,12 +30,13 @@ const Favorite = () => {
     }, [telegramUserId]);
 
     const handleToggleFavorite = async (productId) => {
+        setFavorites((prev) => prev.filter((p) => p.productId !== productId));
+
         try {
             await api.post("/v1/favorite-products/addFavoriteProduct", {
                 telegramUserId,
                 productId,
             });
-            setFavorites((prev) => prev.filter((p) => p.productId !== productId));
         } catch (err) {
             console.log("Failed to update favorite", err);
         }

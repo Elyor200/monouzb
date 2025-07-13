@@ -1,0 +1,96 @@
+.tracker {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px 0;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.completedCircle {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spinnerCircle {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 3px solid #ccc;
+    border-top: 3px solid #007bff;
+    display: inline-block;
+    box-sizing: border-box;
+    animation-name: spin;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.emptyCircle {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    background-color: #f9f9f9;
+}
+
+.label {
+    margin-top: 6px;
+    font-size: 12px;
+    text-align: center;
+    color: #333;
+}
+
+.stepWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.line {
+    width: 20px;
+    height: 2px;
+    margin-bottom: 1.5rem;
+    background-color: #ccc;
+}
+
+
+.checkIcon {
+    color: #35A414;;
+    font-size: 16px;
+}
+
+.clockCircle {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.clockIcon {
+    color: #888;
+    font-size: 14px;
+}
+
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
