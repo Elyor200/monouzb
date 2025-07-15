@@ -25,13 +25,18 @@ const MyProfile = () => {
     const firstLetter = userData?.firstName?.charAt(0).toUpperCase();
 
     useEffect(() => {
-        setLoading(true);
+        const cachedTelegramUserId = localStorage.getItem("cachedTelegramUserId");
+        const cachedUserData = localStorage.getItem("cachedUserData");
+        const cachedAvatar = localStorage.getItem("telegramAvatarUrl");
+
         const fetchUserData = async () => {
+            setLoading(true);
             try {
                 const res = await api.get("v1/users/getUserByTelegramUserId", {
                     params: {telegramUserId}
                 });
                 setUserData(res.data);
+                localStorage.setItem("cachedUserData", JSON.stringify(res.data));
             } catch (error) {
                 console.log(error);
             } finally {
@@ -44,16 +49,30 @@ const MyProfile = () => {
                 const res = await api.get(`/v1/telegram/getUserAvatar`, {
                     params: {telegramUserId}
                 });
-                setAvatarUrl(res.data);
+                const url = res.data;
+                setAvatarUrl(url);
+                localStorage.setItem("telegramAvatarUrl", url);
             } catch (error) {
                 console.error("Avatar fetch error: ", error);
             }
         };
 
-        if (telegramUserId) {
+        const isSameUser = telegramUserId === cachedTelegramUserId;
+        if (cachedUserData && isSameUser) {
+            setUserData(JSON.parse(cachedUserData));
+        } else {
+            localStorage.removeItem("cachedUserData");
             void fetchUserData();
+        }
+
+        if (cachedAvatar && isSameUser) {
+            setAvatarUrl(cachedAvatar);
+        } else {
+            localStorage.removeItem("telegramAvatarUrl");
             void fetchTelegramAvatar();
         }
+
+        localStorage.setItem("cachedTelegramUserId", telegramUserId);
     }, [telegramUserId]);
 
     return (

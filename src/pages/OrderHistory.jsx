@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import styles from '../styles/OrderHistory.module.css'
+import {FiArrowLeft} from "react-icons/fi";
+import {AiOutlineArrowLeft} from "react-icons/ai";
 
 const STATUSES = ['Active', 'Finished'];
 
@@ -66,6 +68,11 @@ const OrderHistory = () => {
 
     return (
         <div className={styles.container}>
+            <div className={styles.headerContainer}>
+                <button className={styles.backButton} onClick={() => navigate(-1)}>
+                    <AiOutlineArrowLeft size={20} />
+                </button>
+            </div>
             <h2>Your Orders</h2>
             <div className={styles.tabContainer}>
                 {STATUSES.map(status => (

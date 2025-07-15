@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import styles from '../styles/OrderDetails.module.css'
 import OrderStatusTracker from "./OrderStatusTracker.jsx";
+import {AiOutlineArrowLeft} from "react-icons/ai";
 
 const ORDER_STEPS = ['Pending', 'Processing', 'Shipped', 'Delivered'];
 
@@ -45,6 +46,11 @@ const OrderDetails = () => {
 
     return (
         <div className={styles.container}>
+            <div className={styles.headerContainer}>
+                <button className={styles.backButton} onClick={() => navigate(-1)}>
+                    <AiOutlineArrowLeft size={20} />
+                </button>
+            </div>
             <h2>Order Details</h2>
             <div className={styles.sectionTracker}>
                 <OrderStatusTracker status={order.status} />
