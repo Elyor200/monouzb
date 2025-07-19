@@ -10,10 +10,9 @@ const OrderStatusTracker = ({ status }) => {
     return (
         <div className={styles.tracker}>
             {STATUSES.map((step, index) => {
-                const isCompleted = index < currentIndex;
-                const isCurrent = index === currentIndex;
-                const isNext = index === currentIndex + 1;
-                const isFuture = index > currentIndex + 1;
+                const isFinal = index === STATUSES.length - 1;
+                const isCompleted = index < currentIndex || (isFinal && index === currentIndex);
+                const isCurrent = index === currentIndex && !isFinal;
 
                 let circle;
                 if (isCompleted) {
