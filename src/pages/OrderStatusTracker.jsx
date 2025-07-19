@@ -1,28 +1,11 @@
 import React, {useEffect} from "react";
 import styles from '../styles/OrderStatusTracker.module.css';
 import {FaCheckCircle, FaRegClock} from "react-icons/fa";
-import Stomp from 'stompjs'
 
 const STATUSES = ['Pending', 'Processing', 'Shipped', 'Delivered'];
 
 const OrderStatusTracker = ({ status }) => {
     const currentIndex = STATUSES.findIndex(s => s.toLowerCase() === status.toLowerCase());
-
-    useEffect(() => {
-        const socket = new SockJS('https://monouzbbackend.onrender.com/ws')
-        const stompClient = Stomp.over(socket);
-
-        stompClient.connect({}, () => {
-            stompClient.subscribe(`/topic/order-status/${orderId}`, (message) => {
-                const data = JSON.parse(message.body);
-                console.log("Status updated: ", data)
-            });
-        });
-
-        return () => {
-            stompClient.disconnect();
-        }
-    }, []);
 
     return (
         <div className={styles.tracker}>

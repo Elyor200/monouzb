@@ -3,12 +3,14 @@ import {useNavigate, useParams} from "react-router-dom";
 import styles from '../styles/OrderDetails.module.css'
 import OrderStatusTracker from "./OrderStatusTracker.jsx";
 import {AiOutlineArrowLeft} from "react-icons/ai";
+import WebSocketOrderStatus from "../sockerSetup.js";
 
 const ORDER_STEPS = ['Pending', 'Processing', 'Shipped', 'Delivered'];
 
 const OrderDetails = () => {
     const {orderId} = useParams();
     const [order, setOrder] = useState(null);
+    const [status, setStatus] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -46,6 +48,13 @@ const OrderDetails = () => {
 
     return (
         <div className={styles.container}>
+            <WebSocketOrderStatus
+                orderId={orderId}
+                onStatusChange={(data) => {
+                    if (data.status) setStatus(data.status);
+                }}
+            />
+
             <div className={styles.headerContainer}>
                 <button className={styles.backButton} onClick={() => navigate(-1)}>
                     <AiOutlineArrowLeft size={20} />
