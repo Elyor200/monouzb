@@ -16,15 +16,15 @@ const OrderStatusTracker = ({ status }) => {
                 const isFuture = index > currentIndex + 1;
 
                 let circle;
-                if (isCompleted || (isCurrent && step === 'Pending')) {
+                if (isCompleted) {
                     circle = (
                         <div className={styles.completedCircle}>
                             <FaCheckCircle size={25} className={styles.checkIcon} />
                         </div>
                     );
-                } else if (isNext) {
+                } else if (isCurrent) {
                     circle = <div className={styles.spinnerCircle} />;
-                } else if (isFuture) {
+                } else {
                     circle = (
                         <div className={styles.clockCircle}>
                             <FaRegClock size={24} className={styles.clockIcon} />
