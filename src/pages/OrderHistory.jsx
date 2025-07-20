@@ -58,6 +58,26 @@ const OrderHistory = () => {
         return `${day}-${month}-${year} ${hours}:${minutes}`;
     }
 
+    const groupOrdersByDate = (orders) => {
+        return orders.reduce((acc, order) => {
+            const date = new Date(order.createdAt);
+            const dateKey = date.toISOString().split('T')[0];
+            if (!acc[dateKey]) {
+                acc[dateKey] = [];
+            }
+            acc[dateKey].push(order);
+            return acc;
+        }, {});
+    };
+
+    function dateWithWeekDays(dateString) {
+        const date = new Date(dateString);
+        const options = { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' };
+        return date.toLocaleDateString('us-Us', options);
+    }
+
+    const groupedOrders = groupOrdersByDate(orders);
+
     if (cartLoading) {
         return (
             <div className={styles.loadingContainer}>
@@ -91,19 +111,23 @@ const OrderHistory = () => {
                 </div>
             ) : (
                 <div className={styles.orders}>
-                    {orders.map(order => (
-                        <div
-                            key={order.orderId}
-                            className={styles.orderCard}
-                            onClick={() => navigate(`/orders/${order.orderId}`)}
-                        >
-                            <div className={styles.orderHeader}>
-                                <span>Order Id: <strong>{order.orderId}</strong></span>
-                                <span>Total: <strong>{formatPrice(order.totalAmount)}</strong></span>
-                                <span>Status: <strong>{order.status}</strong></span>
-                                <span>Date and Time: <strong>{(formatUzbekDate(order.createdAt))}</strong></span>
-                            </div>
-                            <button className={styles.viewDetail}>View Details</button>
+                    {Object.entries(groupedOrders).map(([dateKey, orders]) => (
+                        <div key={dateKey}>
+                            <h4 className={styles.dateHeader}>{dateWithWeekDays(dateKey)}</h4>
+                            {orders.map(order => (
+                                <div
+                                    key={order.orderId}
+                                    className={styles.orderCard}
+                                    onClick={() => navigate(`/orders/${order.orderId}`)}
+                                >
+                                    <div className={styles.orderHeader}>
+                                        <span>Order Id: <strong>{order.orderId}</strong></span>
+                                        <span>Total: <strong>{formatPrice(order.totalAmount)}</strong></span>
+                                        <span>Status: <strong>{order.status}</strong></span>
+                                    </div>
+                                    <button className={styles.viewDetail}>View Details</button>
+                                </div>
+                            ))}
                         </div>
                     ))}
                 </div>

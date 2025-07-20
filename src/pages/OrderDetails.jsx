@@ -75,6 +75,10 @@ const OrderDetails = () => {
                     <p className={styles.border}></p>
                 </div>
                 <div className={styles.section}>
+                    Payment Method: <strong>{order.paymentMethod}</strong>
+                    <p className={styles.border}></p>
+                </div>
+                <div className={styles.section}>
                     Date and Time:{" "}
                     <strong>{formatUzbekDate(order.createdAt)}</strong>
                     <p className={styles.border}></p>

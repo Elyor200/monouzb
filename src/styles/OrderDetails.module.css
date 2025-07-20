@@ -1,6 +1,9 @@
+body {
+    background-color: #F8F8F8FF;
+}
+
 .container {
     padding: 20px;
-    background-color: #F8F8F8FF;
 }
 
 .headerContainer {
@@ -70,7 +73,6 @@
     background-color: #f9f9f9;
     margin-bottom: 10px;
     border-radius: 8px;
-    border: 1px solid #ddd;
 }
 
 .details p {
